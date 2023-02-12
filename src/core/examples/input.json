@@ -1,0 +1,46 @@
+{
+  "loads:": [
+    {
+      "id": 234,
+      "quantity": 2300,
+      "characteristics": [
+        {
+          "name": "moisture",
+          "value": 12.6
+        },
+        {
+          "name": "damaged_grain",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "id": 236,
+      "quantity": 5045,
+      "characteristics": [
+        {
+          "name": "color",
+          "value": "green"
+        },
+        {
+          "name": "moisture",
+          "value": 13.1
+        },
+        {
+          "name": "damaged_grain",
+          "value": 1.2
+        }
+      ]
+    },
+    {
+      "id": 235,
+      "quantity": 6700,
+      "characteristics": [
+        {
+          "name": "damaged_grain",
+          "value": 5.3
+        }
+      ]
+    }
+  ]
+}

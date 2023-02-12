@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "b36f28d2-a27d-46b1-bd67-a01cd2d2f849",
+		"name": "Grainchain",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12802855"
+	},
+	"item": [
+		{
+			"name": "/api/auth/register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 201\"] = responseCode.code === 201;\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"test1\",\r\n    \"password\": \"test123*\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrlLocal}}/auth/register",
+					"host": [
+						"{{baseUrlLocal}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/auth/signin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+							"var data = JSON.parse(responseBody);\r",
+							"pm.environment.set('token', data.data);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"test1\",\r\n    \"password\": \"test123*\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrlLocal}}/auth/signin",
+					"host": [
+						"{{baseUrlLocal}}"
+					],
+					"path": [
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/analysis",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"loads\": [\r\n        {\r\n            \"id\": 234,\r\n            \"quantity\": 2300,\r\n            \"characteristics\": [\r\n                {\r\n                    \"name\": \"moisture\",\r\n                    \"value\": 12.6\r\n                },\r\n                {\r\n                    \"name\": \"damaged_grain\",\r\n                    \"value\": 3\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": 236,\r\n            \"quantity\": 5045,\r\n            \"characteristics\": [\r\n                {\r\n                    \"name\": \"color\",\r\n                    \"value\": \"green\"\r\n                },\r\n                {\r\n                    \"name\": \"moisture\",\r\n                    \"value\": 13.1\r\n                },\r\n                {\r\n                    \"name\": \"damaged_grain\",\r\n                    \"value\": 1.2\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": 235,\r\n            \"quantity\": 6700,\r\n            \"characteristics\": [\r\n                {\r\n                    \"name\": \"damaged_grain\",\r\n                    \"value\": 5.3\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrlLocal}}/analysis",
+					"host": [
+						"{{baseUrlLocal}}"
+					],
+					"path": [
+						"analysis"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/auth/signout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrlLocal}}/auth/signout",
+					"host": [
+						"{{baseUrlLocal}}"
+					],
+					"path": [
+						"auth",
+						"signout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/analysis failed auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 401\"] = responseCode.code === 401;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"loads\": [\r\n        {\r\n            \"id\": 234,\r\n            \"quantity\": 2300,\r\n            \"characteristics\": [\r\n                {\r\n                    \"name\": \"moisture\",\r\n                    \"value\": 12.6\r\n                },\r\n                {\r\n                    \"name\": \"damaged_grain\",\r\n                    \"value\": 3\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": 236,\r\n            \"quantity\": 5045,\r\n            \"characteristics\": [\r\n                {\r\n                    \"name\": \"color\",\r\n                    \"value\": \"green\"\r\n                },\r\n                {\r\n                    \"name\": \"moisture\",\r\n                    \"value\": 13.1\r\n                },\r\n                {\r\n                    \"name\": \"damaged_grain\",\r\n                    \"value\": 1.2\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": 235,\r\n            \"quantity\": 6700,\r\n            \"characteristics\": [\r\n                {\r\n                    \"name\": \"damaged_grain\",\r\n                    \"value\": 5.3\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrlLocal}}/analysis",
+					"host": [
+						"{{baseUrlLocal}}"
+					],
+					"path": [
+						"analysis"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
